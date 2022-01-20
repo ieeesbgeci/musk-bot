@@ -12,14 +12,14 @@ class g_r_mod(commands.Cog):
 
 	
 	@commands.Cog.listener()
-	async def on_member_join(self,ctx,member):
+	async def on_member_join(self,member):
 		#welcomes new users to server :)
 		channel=member.guild.system_channel
 		cvalue = random.randint(0, 0xffffff)
 		embed  = discord.Embed(description=f"Sangha Shathiyileeku swagatham {member} Mitramee",color=cvalue)
 		file= discord.File("/app/files/pm_modi.jpg")
 		embed.set_image(url="attachment://pm_modi.jpg")
-		await ctx.send(embed=embed)
+		await channel.send(embed=embed)
 
 	# @commands.Cog.listener()
 	# async def on_reaction_add(self,reaction,user):
