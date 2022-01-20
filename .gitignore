@@ -1,0 +1,4 @@
+g-tech-venv
+.vscode
+__pycache__
+.env
