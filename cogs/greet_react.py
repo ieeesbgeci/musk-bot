@@ -32,7 +32,7 @@ class g_r_mod(commands.Cog):
 	async def help(self,ctx):
 		#send help message
 		cvalue = random.randint(0, 0xffffff)
-		embed = discord.Embed(title=" HELP ", description="Mem Modi ji Hum.Mere pyari Sangha_Vashiyoo.",color=cvalue)
+		embed = discord.Embed(title=" HELP ", description="Mem Modi ji Hum.Mere pyari Sangha_VaaSiyom.",color=cvalue)
 		embed.add_field(name="!dwajapranamam",value="Mitrangale Ashirwadikkum", inline=False)
 		await ctx.send(embed=embed)
 
@@ -42,7 +42,7 @@ class g_r_mod(commands.Cog):
 			await ctx.send("Command not found!")
 
 	@commands.command()
-	async def dwajapranam(self,ctx):
+	async def dwajapranamam(self,ctx):
 		cvalue = random.randint(0, 0xffffff)
 		embed=discord.Embed(description="Dwajaprenam Mitramee :)")
 		file= discord.File("/app/files/pranamam.png")
