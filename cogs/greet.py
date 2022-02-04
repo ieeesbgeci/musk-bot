@@ -9,6 +9,7 @@ class g_r_mod(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.role_name=os.environ["ROLE_NAME"]
+        self.v_channel_id=os.environ["V_CHANNEL_ID"]
 
     @commands.Cog.listener()
     # on ready function to display login :)
@@ -32,10 +33,14 @@ class g_r_mod(commands.Cog):
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
         if isinstance(error, commands.CommandNotFound):
-            await ctx.send("Command not found!")
+            pass
+            # await ctx.send("Command not found!")
 
     @commands.command()
     async def verify(self, ctx):
+        if ctx.channel.id!=self.v_channel_id:
+            print("wrong channel")
+            return
         role = discord.utils.get(ctx.guild.roles, name=self.role_name)
         if role not in ctx.message.author.roles:
             if verify_user(str(ctx.message.author.id)):
