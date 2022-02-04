@@ -18,7 +18,6 @@ class g_r_mod(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
-
         # welcomes new users to server :)
         channel = member.guild.system_channel
         cvalue = random.randint(0, 0xffffff)
@@ -39,8 +38,6 @@ class g_r_mod(commands.Cog):
     @commands.command()
     async def verify(self, ctx):
         if str(ctx.channel.id)!=str(self.v_channel_id):
-            print(f"{ctx.channel.id} != v_channel >> {self.v_channel_id}")
-            print("wrong channel")
             return
         role = discord.utils.get(ctx.guild.roles, name=self.role_name)
         if role not in ctx.message.author.roles:
