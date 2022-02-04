@@ -27,7 +27,7 @@ class g_r_mod(commands.Cog):
         if verify_user(str(member.id)):
             await self.assign_role(guild=member.guild, author=member)
         else:
-            print(f"Id of {member.name} not found in database :)")
+            print(f"Id of {member.name} not found in database")
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
@@ -48,7 +48,7 @@ class g_r_mod(commands.Cog):
             else:
                 await ctx.send("Unable to verify.Ping the mods `@mods` for more info.")
         else:
-            await ctx.send("User already verified :)")
+            await ctx.send("User already verified")
 
     async def assign_role(self, guild, author):
         if not discord.utils.get(guild.roles, name=self.role_name):
