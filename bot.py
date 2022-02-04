@@ -11,8 +11,5 @@ bot=commands.Bot(command_prefix="!",help_command=None,intents=intents)
 token=os.environ['BOT_TOKEN']
 #add extension files from cog folder :)
 bot.load_extension("cogs.greet")
-#bot.load_extension("cogs.modi_talks")
-#bot.load_extension("cogs.role")
-#bot.load_extension("cogs.admin")
 #run bot using bot token :)
 bot.run(token)
