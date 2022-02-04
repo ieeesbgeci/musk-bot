@@ -39,6 +39,7 @@ class g_r_mod(commands.Cog):
     @commands.command()
     async def verify(self, ctx):
         if ctx.channel.id!=self.v_channel_id:
+            print(f"{ctx.channel.id} != v_channel >> {self.v_channel_id}")
             print("wrong channel")
             return
         role = discord.utils.get(ctx.guild.roles, name=self.role_name)
