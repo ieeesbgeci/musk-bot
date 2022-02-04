@@ -1,5 +1,4 @@
 import os
-from turtle import color
 from discord.ext import commands
 import discord
 import random
