@@ -38,7 +38,7 @@ class g_r_mod(commands.Cog):
 
     @commands.command()
     async def verify(self, ctx):
-        if ctx.channel.id!=self.v_channel_id:
+        if str(ctx.channel.id)!=str(self.v_channel_id):
             print(f"{ctx.channel.id} != v_channel >> {self.v_channel_id}")
             print("wrong channel")
             return
