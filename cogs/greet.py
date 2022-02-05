@@ -25,7 +25,7 @@ class g_r_mod(commands.Cog):
         embed = discord.Embed(
             description=f"Welcome {member.name} :)", color=cvalue)
         await channel.send(embed=embed)
-        if verify_user(str(member.id)):
+        if verify_user(str(member)):
             await self.assign_role(guild=member.guild, author=member)
         else:
             await member.channel.send(f"Id of {member.name} not found in database")
@@ -42,7 +42,7 @@ class g_r_mod(commands.Cog):
             return
         role = discord.utils.get(ctx.guild.roles, name=self.role_name)
         if role not in ctx.message.author.roles:
-            if verify_user(str(ctx.message.author.id)):
+            if verify_user(str(ctx.message.author)):
                 guild = ctx.guild
                 author = ctx.message.author
                 await self.assign_role(guild, author)

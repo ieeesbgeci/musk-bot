@@ -1,8 +1,8 @@
 import requests
 import os
-def verify_user(id):
+def verify_user(uname):
 	url=os.environ['API_URL']
-	data={'discord_id':id}
+	data={'uname':uname}
 	try:
 		res = requests.post(url, json = data)
 		if res.json()["result"]=="Id found":
