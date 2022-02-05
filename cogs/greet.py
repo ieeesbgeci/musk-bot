@@ -9,6 +9,7 @@ class g_r_mod(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.role_name=os.environ["ROLE_NAME"]
+        self.mod_role=os.environ["MOD_ROLE"]
         self.v_channel_id=os.environ["V_CHANNEL_ID"]
 
     @commands.Cog.listener()
@@ -27,7 +28,7 @@ class g_r_mod(commands.Cog):
         if verify_user(str(member.id)):
             await self.assign_role(guild=member.guild, author=member)
         else:
-            print(f"Id of {member.name} not found in database")
+            await member.channel.send(f"Id of {member.name} not found in database")
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
@@ -45,8 +46,9 @@ class g_r_mod(commands.Cog):
                 guild = ctx.guild
                 author = ctx.message.author
                 await self.assign_role(guild, author)
+                await ctx.send(f"{author.name} is verified successfully.")
             else:
-                await ctx.send("Unable to verify.Ping the mods `@mods` for more info.")
+                await ctx.send(f"Unable to verify.Ping the mods `@{self.mod_role}` for more info.")
         else:
             await ctx.send("User already verified")
 
