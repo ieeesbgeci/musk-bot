@@ -26,7 +26,7 @@ class g_r_mod(commands.Cog):
         embed = discord.Embed(
             description=f"Welcome {member.name} ", color=cvalue)
         await channel.send(embed=embed)
-        if verify_user(str(member)):
+        if verify_user(str(self.parse_uname(member))):
             await self.assign_role(guild=member.guild, author=member,verify=True)
         else:
             await self.assign_role(guild=member.guild,author=member,verify=False)
@@ -44,7 +44,7 @@ class g_r_mod(commands.Cog):
             return
         role = discord.utils.get(ctx.guild.roles, name=self.role_name)
         if role not in ctx.message.author.roles:
-            if verify_user(str(ctx.message.author)):
+            if verify_user(str(self.parse_uname(ctx.message.author))):
                 guild = ctx.guild
                 author = ctx.message.author
                 await self.assign_role(guild, author,verify=True)
@@ -81,6 +81,9 @@ class g_r_mod(commands.Cog):
                 await author.remove_roles(role)
             except Exception as err:
                 print(err)
+
+    async def parse_uname(uname):
+        return uname.replace(" ","").lower()
 
 def setup(bot):
     bot.add_cog(g_r_mod(bot))
