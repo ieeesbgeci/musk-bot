@@ -24,7 +24,7 @@ class g_r_mod(commands.Cog):
         channel = member.guild.system_channel
         cvalue = random.randint(0, 0xffffff)
         embed = discord.Embed(
-            description=f"Welcome {member.name} :)", color=cvalue)
+            description=f"Welcome {member.name} :) ", color=cvalue)
         await channel.send(embed=embed)
         if verify_user(str(member)):
             await self.assign_role(guild=member.guild, author=member,verify=True)
