@@ -11,6 +11,7 @@ class g_r_mod(commands.Cog):
         self.role_name=os.environ["ROLE_NAME"]
         self.mod_role=os.environ["MOD_ROLE"]
         self.v_channel_id=os.environ["V_CHANNEL_ID"]
+        self.non_verify_role=os.environ["NON_V_ROLE_NAME"]
 
     @commands.Cog.listener()
     # on ready function to display login :)
@@ -26,8 +27,9 @@ class g_r_mod(commands.Cog):
             description=f"Welcome {member.name} :)", color=cvalue)
         await channel.send(embed=embed)
         if verify_user(str(member)):
-            await self.assign_role(guild=member.guild, author=member)
+            await self.assign_role(guild=member.guild, author=member,verify=True)
         else:
+            await self.assign_role(guild=member.guild,author=member,verify=False)
             await member.channel.send(f"Id of {member.name} not found in database")
 
     @commands.Cog.listener()
@@ -45,27 +47,40 @@ class g_r_mod(commands.Cog):
             if verify_user(str(ctx.message.author)):
                 guild = ctx.guild
                 author = ctx.message.author
-                await self.assign_role(guild, author)
+                await self.assign_role(guild, author,verify=True)
+                await self.rem_unverify(guild,author)
                 await ctx.send(f"{author.name} is verified successfully.")
             else:
                 await ctx.send(f"Unable to verify.Ping the mods `@{self.mod_role}` for more info.")
         else:
             await ctx.send("User already verified")
 
-    async def assign_role(self, guild, author):
-        if not discord.utils.get(guild.roles, name=self.role_name):
+    async def assign_role(self, guild, author,verify):
+        if verify==False:
+            role_name=self.non_verify_role
+        else:
+            role_name=self.role_name
+
+        if not discord.utils.get(guild.roles, name=role_name):
             # print(f"created role {self.role_name}\n")
             cvalue = random.randint(0, 0xffffff)
-            await guild.create_role(name=self.role_name, color=cvalue)
+            await guild.create_role(name=role_name, color=cvalue)
         # else:
             # print(f"role {self.role_name} exists")
-        role = discord.utils.get(guild.roles, name=self.role_name)
+        role = discord.utils.get(guild.roles, name=role_name)
         if not role in author.roles:
             try:
                 await author.add_roles(role)
             except Exception as err:
                 print(err)
 
+    async def rem_unverify(self,guild,author):
+        role = discord.utils.get(guild.roles, name=self.non_verify_role)
+        if not role in author.roles:
+            try:
+                await author.remove_roles(role)
+            except Exception as err:
+                print(err)
 
 def setup(bot):
     bot.add_cog(g_r_mod(bot))
