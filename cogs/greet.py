@@ -26,7 +26,7 @@ class g_r_mod(commands.Cog):
         embed = discord.Embed(
             description=f"Welcome {member.name} ", color=cvalue)
         await channel.send(embed=embed)
-        if verify_user(str(await self.parse_uname(member))):
+        if verify_user(await self.parse_uname(str(member))):
             await self.assign_role(guild=member.guild, author=member,verify=True)
         else:
             await self.assign_role(guild=member.guild,author=member,verify=False)
@@ -44,7 +44,7 @@ class g_r_mod(commands.Cog):
             return
         role = discord.utils.get(ctx.guild.roles, name=self.role_name)
         if role not in ctx.message.author.roles:
-            if verify_user(str(await self.parse_uname(ctx.message.author))):
+            if verify_user(await self.parse_uname(str(ctx.message.author))):
                 guild = ctx.guild
                 author = ctx.message.author
                 await self.assign_role(guild, author,verify=True)
