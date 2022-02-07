@@ -82,7 +82,7 @@ class g_r_mod(commands.Cog):
             except Exception as err:
                 print(err)
 
-    async def parse_uname(uname):
+    async def parse_uname(self,uname):
         return uname.replace(" ","").lower()
 
 def setup(bot):
