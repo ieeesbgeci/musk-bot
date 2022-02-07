@@ -30,7 +30,7 @@ class g_r_mod(commands.Cog):
             await self.assign_role(guild=member.guild, author=member,verify=True)
         else:
             await self.assign_role(guild=member.guild,author=member,verify=False)
-            await member.channel.send(f"Id of {member.name} not found in database")
+            print(f"Id of {member.name} not found in database")
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
