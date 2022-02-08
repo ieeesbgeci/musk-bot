@@ -76,7 +76,7 @@ class g_r_mod(commands.Cog):
 
     async def rem_unverify(self,guild,author):
         role = discord.utils.get(guild.roles, name=self.non_verify_role)
-        if not role in author.roles:
+        if role in author.roles:
             try:
                 await author.remove_roles(role)
             except Exception as err:
